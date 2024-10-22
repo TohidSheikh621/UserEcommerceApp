@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="SearchViewStyle" parent="Widget.AppCompat.SearchView">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+
+    <!-- Full-Screen Bottom Sheet Style -->
+    <style name="FullScreenBottomSheetDialog" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/FullScreenBottomSheet</item>
+    </style>
+
+    <style name="FullScreenBottomSheet" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:layout_height">match_parent</item> <!-- Make it full screen -->
+        <item name="behavior_peekHeight">0dp</item> <!-- Peek height to 0 to show full screen -->
+    </style>
+
+</resources>

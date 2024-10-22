@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:background="@drawable/app_bg"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.StartActivity">
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_marginTop="80dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/next_logo_removebg_preview" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:textAllCaps="true"
+        android:fontFamily="@font/latobold"
+        android:textColor="@color/lavenderDark"
+        android:textSize="18sp"
+        android:letterSpacing="0.1"
+        android:lineHeight="25sp"
+        android:textAlignment="center"
+        android:text="@string/makeup_is_art_amp_nbeauty_is_spirit"
+        app:layout_constraintEnd_toEndOf="@+id/imageView2"
+        app:layout_constraintStart_toStartOf="@+id/imageView2"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:text="@string/design_by_nsk_brothers"
+        android:textColor="@color/lavenderDark"
+        android:textSize="12sp"
+        android:fontFamily="@font/latolight"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/next_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginBottom="45dp"
+        android:text="@string/next"
+        android:paddingHorizontal="40dp"
+        android:textColor="@color/lavenderDark"
+        android:fontFamily="@font/latobold"
+        android:background="@drawable/next_btn_shape"
+        app:layout_constraintBottom_toTopOf="@+id/textView4"
+        app:layout_constraintEnd_toEndOf="@+id/textView4"
+        app:layout_constraintStart_toStartOf="@+id/textView4" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
