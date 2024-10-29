@@ -40,8 +40,6 @@ class DetailsActivity : BaseActivity() {
     private lateinit var auth: FirebaseAuth
 
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailsBinding.inflate(layoutInflater)
@@ -64,23 +62,32 @@ class DetailsActivity : BaseActivity() {
                 // Simulate a delay for smoother transition (optional, for user experience)
                 Handler(Looper.getMainLooper()).postDelayed({
                     // Create an intent to start PayOutActivity
-                    val intent = Intent(this@DetailsActivity, PayOutActivity::class.java).apply {
-                        putExtra("productItemName", arrayListOf(productName))
-                        putExtra("productItemId", arrayListOf(productId))
-                        putExtra("productItemPrice", arrayListOf(productPrice))
-                        putExtra("productItemImage", arrayListOf(productImage))
-                        putExtra("productItemDescription", arrayListOf(productDescription))
-                        putExtra("productItemIngredients", arrayListOf(productIngredients))
-                        putExtra("productItemColor", arrayListOf(colors))
-                        putExtra(
-                            "productItemQuantity", arrayListOf(1)
-                        ) // Adjust quantity if necessary
-                    }
+
+                    if (colors.isNullOrEmpty() || colors == "Choose Color") {
+                        snackBarTop(binding.root, "Please Select Color")
+                        showLoaderWithOverlay(false)
+                        showLoader(false)
+                    } else {
+                        val intent =
+                            Intent(this@DetailsActivity, PayOutActivity::class.java).apply {
+                                putExtra("productItemName", arrayListOf(productName))
+                                putExtra("productItemId", arrayListOf(productId))
+                                putExtra("productItemPrice", arrayListOf(productPrice))
+                                putExtra("productItemImage", arrayListOf(productImage))
+                                putExtra("productItemDescription", arrayListOf(productDescription))
+                                putExtra("productItemIngredients", arrayListOf(productIngredients))
+                                putExtra("productItemColor", arrayListOf(colors))
+                                putExtra(
+                                    "productItemQuantity", arrayListOf(1)
+                                ) // Adjust quantity if necessary
+                            }
+
 
                     // Hide the loader after navigating
                     showLoader(false)
                     // Start PayOutActivity
                     startActivity(intent)
+                    }
                 }, 1000)
             } else {
                 dialog = SweetAlertDialog(
@@ -121,8 +128,9 @@ class DetailsActivity : BaseActivity() {
         binding.addToCartDetailsBtn.setOnClickListener {
             Log.d("Add to Cart", "Current selected color: $colors")
             if (isInternetOn(this)) {
-                if (colors!!.equals("Choose Color")) {
+                if (colors.isNullOrEmpty() || colors == "Choose Color") {
                     snackBarTop(binding.root, "Please Select Color")
+
                 } else {
                     // Toggle between adding or removing from the cart
                     if (!atc) {
@@ -164,7 +172,7 @@ class DetailsActivity : BaseActivity() {
             this.colors = selectedColor
         }
 
-         productId = intent.getStringExtra("MenuItemId") // Retrieve the push key here
+        productId = intent.getStringExtra("MenuItemId") // Retrieve the push key here
         Log.d("DetailsActivity", "Opening DetailsActivity with productId: $productId")
 
         loadColorsWithoutProductId(productId!!)
@@ -288,7 +296,8 @@ class DetailsActivity : BaseActivity() {
         )
 
         // Add the item to the cart
-        val newCartItemRef = database.reference.child("user").child(userId).child("CartItems").push()
+        val newCartItemRef =
+            database.reference.child("user").child(userId).child("CartItems").push()
         cartItemKey = newCartItemRef.key
 
         newCartItemRef.setValue(cartItems).addOnSuccessListener {
@@ -321,8 +330,7 @@ class DetailsActivity : BaseActivity() {
     }
 
 
-
-    private fun loadColorsWithoutProductId(productId : String) {
+    private fun loadColorsWithoutProductId(productId: String) {
         val database = FirebaseDatabase.getInstance().reference
         val userId = auth.currentUser?.uid ?: ""
 
@@ -351,16 +359,13 @@ class DetailsActivity : BaseActivity() {
 
                         // Populate AutoCompleteTextView with all available colors and selected color
                         populateColors(
-                            binding.listOfColor,
-                            selectedColor,
-                            allAvailableColors.toList()
+                            binding.listOfColor, selectedColor, allAvailableColors.toList()
                         )
                     }.addOnFailureListener {
-                    snackBarTop(
-                        binding.root,
-                        "Failed to load selected color from cart: ${it.message}"
-                    )
-                }
+                        snackBarTop(
+                            binding.root, "Failed to load selected color from cart: ${it.message}"
+                        )
+                    }
             } else {
                 snackBarTop(binding.root, "No products found")
             }
@@ -404,7 +409,6 @@ class DetailsActivity : BaseActivity() {
             showLoaderWithOverlay(false)
         }
     }
-
 
 
 }
