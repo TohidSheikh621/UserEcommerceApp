@@ -22,7 +22,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Home blank fragment</string>
 
-    <string name="default_web_client_id">727543581426-pk2r0n41ok1e9ch2i65ikedd6bm66jlh.apps.googleusercontent.com</string>
+    <string name="default_web_client_id">727543581426-dloeq80u8sbvlqnafu9g1g2gj6bjpvdg.apps.googleusercontent.com</string>
     <string name="title_internet">Internet Connection</string>
     <string name="content_internet">Please check internet connection!</string>
 

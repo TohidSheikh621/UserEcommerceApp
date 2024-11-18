@@ -202,7 +202,8 @@ class LoginActivity : BaseActivity() {
 
                             snackBarBottom(binding.root, "Google Sign In Failed")
 
-                            Log.d("Account", "GoogleSignIn : Failure", task.exception)
+                            Log.e("GoogleSignIn", "Error signing in: ${authTask.exception?.message}", authTask.exception)
+
                             showLoader(false)
                         }
                     }
